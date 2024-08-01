@@ -1,45 +1,31 @@
 ####NET CONFIGURATION
+terraform {
+  backend "s3" {
+    bucket  = "pedrobucket26"
+    key     = "terraform-test.tfstate"
+    region  = "us-east-2"
+    encrypt = true
+  }
+
+}
+
+provider "aws" {
+  region  = "us-east-2"
+  version = "~> 5.58.0"
+
+}
+
+
 module "producao" {
 
   source = "git::https://github.com/pedrohfborges/terraform-ecs-fargate.git"
 
-      variable "vpc" {
-        default     = "192.168.0.0/16"
-        description = "Set VCN IP"
-      }
-
-      variable "public_subnet" {
-        default     = "192.168.30.0/24"
-        description = "Set Subnet Public"
-      }
-
-      variable "netprivate" {
-        default     = "192.168.40.0/24"
-        description = "Set subnet Private"
-      }
-
-      variable "cluster_name" {
-        default = "NomedoClusterTeste"
-      }
-
-      variable "task_definition_family" {
-        default = "my-task-def" # Nome da definição de tarefa ECS
-      }
-
-      variable "service_name" {
-        default = "my-ecs-service" # Nome do serviço ECS
-      }
-
-      variable "region" {
-        type = string
-        default = "us-east-2"
-      }
-
-      variable "bucket" {
-        type = string
-        default = "pedrobucket26"
-      }
-
+    vpc = "192.168.0.0/16"
+    public_subnet = "192.168.30.0/24"
+    netprivate = "192.168.40.0/24"
+    cluster_name = "NomedoClusterTeste"
+    task_definition_family = "my-task-def"
+    service_name = "my-ecs-service"
 
 }
 
