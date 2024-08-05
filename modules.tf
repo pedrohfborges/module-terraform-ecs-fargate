@@ -26,7 +26,12 @@ module "producao" {
     cluster_name = "NomedoClusterTeste"
     task_definition_family = "my-task-def"
     service_name = "my-ecs-service"
-
+    nometarefa = "whoami"
+    containerimage = "stefanscherer/whoami:latest"
+    cpu = 256
+    memory = 512
+    containerport = 8080
+    
 }
 
 
